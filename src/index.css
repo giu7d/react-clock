@@ -13,3 +13,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.fullScreen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.Clock {
+  position: relative;
+  display: block;
+  height: 65vh;
+  line-height: 10;
+  text-align: center;
+}
+
+.ControlBtn {
+  height: 20vh;
+  line-height: 10;
+  text-align: center;
+}
