@@ -9,6 +9,7 @@ body {
 }
 
 code {
+  font-size: 32pt;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
