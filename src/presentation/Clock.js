@@ -4,12 +4,10 @@ import { Paper, Grid } from '@material-ui/core'
 
 const clock = (props) => {
 
-  const { time } = props;
-
   return (
     <Grid item xs={12}>
       <Paper className="Clock">
-        <code>{ time }</code>
+        <code>{ props.time }</code>
       </Paper>
     </Grid>
   )

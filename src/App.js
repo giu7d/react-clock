@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from './presentation/Layout';
-import Chronometer from './container/Chronometer';
+import Timer from './container/Timer';
 import History from './container/History';
 
 
@@ -10,7 +10,7 @@ class App extends Component {
 
     return (
       <Layout>
-        <Chronometer />
+        <Timer />
         <History />
       </Layout>
     )
