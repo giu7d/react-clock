@@ -2,30 +2,50 @@ import React, { Component } from 'react'
 import { Grid, Typography, List, ListItem } from '@material-ui/core'
 import { HistoryOutlined } from '@material-ui/icons';
 import TimerContext from '../context/TimerContext';
-
+import Axios from 'axios';
 
 export default class History extends Component {
 
   static contextType = TimerContext;
-
-
-  componentDidMount() {
-    console.log('Mount');
-    this.context.pushToArray = this.pushTime;
-  }
-
-
+  
   state = {
     items : []
   }
+  
 
+  // componentWillMount()
+  // 
+  // Método padrão do react que executa antes do ciclo de render().
+  // É recomendado sua utilização para **transformação de estados**
+  // na inicialização do componente.
+  //
+  // Nesse caso, utilizamos para inicializarmos a função pushToArray() 
+  // do TIMERCONTEXT antes da inicialização dos componentes. 
 
-  log = () => {
-    console.log(this.context);
-    console.log(this.state);
+  componentWillMount() {
+    this.context.pushToArray = this._pushTime;
   }
 
-  pushTime = () => {
+  // componentDidMount()
+  // 
+  // Método padrão do react que executa após o ciclo de render()
+  // e aciona um novo ciclo de render() após as mudanças.
+  // É recomendado para atividades que possuem "Side-Effects"
+  // Não é recomendado para mudança de estado, pois piora o desempenho
+  // 
+  // Nesse caso, utilizaremos para realizar requisições HTTP; 
+
+  componentDidMount() {
+    Axios.get()
+  }
+  
+
+  // _pushTime()
+  // 
+  // Este metodo será utilizado pelo componente TIMER
+  // para inserir o estado do TIMERCONTEXT diretamente
+  // no array items do HISTORY
+  _pushTime = () => {
     const list = [...this.state.items]
     list.push(this.context.timeStr);
     
@@ -34,13 +54,14 @@ export default class History extends Component {
     });
   }
 
+ 
   render() {
     return (
       <Grid container 
             spacing={24}
             className="fullScreen"
             justify="center">
-        <Grid item xs={10} onClick={this.log}>
+        <Grid item xs={10}>
           <Typography component="h2" 
                       variant="display1" 
                       gutterBottom>
