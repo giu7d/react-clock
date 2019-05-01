@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Grid, Typography, List, ListItem } from '@material-ui/core'
 import { HistoryOutlined } from '@material-ui/icons';
 import TimerContext from '../context/TimerContext';
-import Axios from 'axios';
+// import Axios from 'axios';
+import FirebaseService from '../services/FirebaseServices';
 
 export default class History extends Component {
 
@@ -36,7 +37,21 @@ export default class History extends Component {
   // Nesse caso, utilizaremos para realizar requisições HTTP; 
 
   componentDidMount() {
-    Axios.get()
+
+    // Vamos user o firebase, caso só fossemos fazer uma requisição 
+    // HTTP usariamos modulos como o axios, http ou request;
+    // Ex:
+    // Axios.get('https://jsonplaceholder.typicode.com/todos')
+    //   .then(res => console.log(res));
+
+    FirebaseService.get('times', res => {
+      
+      const dataArray = res.map(el => el.data.time);
+      const list = [...this.state.items]    
+      list.push(...dataArray);
+      
+      this.setState({ items: list })
+    });
   }
   
 
@@ -45,13 +60,17 @@ export default class History extends Component {
   // Este metodo será utilizado pelo componente TIMER
   // para inserir o estado do TIMERCONTEXT diretamente
   // no array items do HISTORY
+  // Tambem usaremos o metodo para adicionar a informação no Firebase
   _pushTime = () => {
+
     const list = [...this.state.items]
     list.push(this.context.timeStr);
-    
-    this.setState({
-      items: list
-    });
+    this.setState({ items: list });
+
+    FirebaseService.post(
+      'times', 
+      { time: this.context.timeStr },
+      res => console.log(res));
   }
 
  
