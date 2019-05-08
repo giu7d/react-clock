@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import Layout from './presentation/Layout';
-import Timer from './container/Timer';
+import Chronometer from './container/Chronometer';
 import History from './container/History';
-
+import { Route } from 'react-router-dom'
 
 class App extends Component {
   
   render() {
-
     return (
       <Layout>
-        <Timer />
-        <History />
+        <Route path="/" exact component={Chronometer} />
+        <Route path="/history" component={History} />
       </Layout>
     )
   }

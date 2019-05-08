@@ -16,7 +16,11 @@ code {
 
 .fullScreen {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.fullScreen:last-of-type {
+  padding-top: 25px;
 }
 
 .Clock {

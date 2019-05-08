@@ -1,6 +1,7 @@
-import React from 'react'
-import { Grid, Fab } from '@material-ui/core'
-import { Alarm, Stop, Loop, FavoriteBorder } from '@material-ui/icons';
+import React from 'react';
+import { Grid, Fab } from '@material-ui/core';
+import { Alarm, Stop, Loop, FavoriteBorder, History } from '@material-ui/icons';
+
 
 const controlBtn = (props) => {
 	
@@ -20,7 +21,7 @@ const controlBtn = (props) => {
 		<Fab  size="large"
 					color="secondary" 
 					aria-label="Stop Count" 
-					className="start"
+					className="stop"
 					onClick={props.stop}>
 			<Stop />              
 		</Fab>
@@ -30,7 +31,7 @@ const controlBtn = (props) => {
 		<Fab  size="medium"
 					color="secondary" 
 					aria-label="Reset Count" 
-					className="start"
+					className="reset"
 					onClick={props.reset}>
 			<Loop />              
 		</Fab>
@@ -38,25 +39,31 @@ const controlBtn = (props) => {
 
 	const save = (
 		<Fab  size="medium"
-					aria-label="Start Count" 
-					className="danger"
+					aria-label="Start Count"
 					onClick={props.save}>
 			<FavoriteBorder />              
 		</Fab>
 	);
 	
+	
+	const history = (
+		<Fab  size="medium"
+					aria-label="Start Count">
+			<History onClick={props.history} />              
+		</Fab>
+	);
+
 	return (
     <Grid container justify="center">
     	<Grid item xs={4} className="ControlBtn">
-				{(time !== '00:00:00') ? reset : null }
+				{(state || time !== '00:00:00') ? reset : null }
 			</Grid>
 			<Grid item xs={4} className="ControlBtn">
 				{(state) ? stop : start }
 			</Grid>
     	<Grid item xs={4} className="ControlBtn">
-			 {(time !== '00:00:00') ? save : null} 
+			 {(state || time !== '00:00:00') ? save : history} 
 			</Grid>
-
     </Grid>
   )
 }

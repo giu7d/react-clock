@@ -1,8 +1,11 @@
 import React from 'react';
 
 const timerContext = React.createContext({
-    timeStr: '00:00:00',
-    pushToArray: () => {}
+    timer: '00:00:00',
+    start: () => {},
+    stop: () => {},
+    reset: () => {},
+    save: () => {}
 });
 
 export default timerContext;
